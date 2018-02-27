@@ -10,3 +10,12 @@ target/
 _site/
 .idea
 *.iml
+/server/gradle/
+/client/gradle/
+/server/build/
+/server/.idea/
+/.idea/
+/client/.gradle/
+/client/build/
+/client/.idea/
+/server/.gradle/
