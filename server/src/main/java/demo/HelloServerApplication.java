@@ -1,5 +1,8 @@
 package demo;
 
+import java.util.List;
+import java.util.Random;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,13 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableDiscoveryClient
 @RestController
 public class HelloServerApplication {
+
 	@Autowired
 	DiscoveryClient client;
 
 	@RequestMapping("/")
 	public String hello() {
-		ServiceInstance localInstance = client.getLocalServiceInstance();
-		return "Hello World: "+ localInstance.getServiceId()+":"+localInstance.getHost()+":"+localInstance.getPort();
+		List<ServiceInstance> instances = client.getInstances("HelloServer");
+		ServiceInstance selectedInstance = instances
+				.get(new Random().nextInt(instances.size()));
+		return "Hello World: " + selectedInstance.getServiceId() + ":" + selectedInstance
+				.getHost() + ":" + selectedInstance.getPort();
 	}
 
 	public static void main(String[] args) {
