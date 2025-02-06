@@ -14,3 +14,9 @@ eureka:
     leaseRenewalIntervalInSeconds: 10
     metadataMap:
       instanceId: ${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+
+soap:
+  server:
+    uri: /ws
+    marshaller:
+      context-path: demo.wsdl
